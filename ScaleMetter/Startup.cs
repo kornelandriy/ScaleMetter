@@ -10,10 +10,24 @@ namespace ScaleMetter
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+//
+//            Log.Logger = new LoggerConfiguration()
+//                .WriteTo.ColoredConsole(LogEventLevel.Verbose,
+//                    "{NewLine}{Timestamp:HH:mm:ss} [{Level}] ({CorrelationToken}) {Message}{NewLine}{Exception}")
+//                .WriteTo.RollingFile(GetLogFile(),
+//                    outputTemplate: "{NewLine}{Timestamp:HH:mm:ss} [{Level}] ({CorrelationToken}) {Message}{NewLine}{Exception}")
+//                .CreateLogger();
         }
+
 
         public IConfiguration Configuration { get; }
 
@@ -27,6 +41,19 @@ namespace ScaleMetter
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            
+            services.AddCors(
+                options => options.AddPolicy("AllowCors",
+                    builder =>
+                    {
+                        builder
+//                            .WithOrigins("http://localhost:4200")
+                            .AllowAnyOrigin()
+                            .AllowCredentials()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    })
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
