@@ -29,6 +29,33 @@
     <None Update="uninstall.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Remove="ClientApp\dist\**" />
+    <Content Remove="ClientApp\dist\**" />
+    <None Remove="ClientApp\translat\**" />
+    <Content Remove="ClientApp\translat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\dist\**" />
+    <Compile Remove="ClientApp\translat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ClientApp\dist\**" />
+    <EmbeddedResource Remove="ClientApp\translat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\.angular-cli.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\e2e\tsconfig.e2e.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\package-lock.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\package.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\src\assets\i18n\en.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\src\assets\i18n\ua.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\src\tsconfig.app.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\src\tsconfig.spec.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="ClientApp\translat\medium-i18n\tslint.json" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

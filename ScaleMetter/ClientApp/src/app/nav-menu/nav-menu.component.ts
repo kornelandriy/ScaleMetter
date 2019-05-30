@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '../services/translate.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
+
+  constructor(private translate: TranslateService) {}
+
   isExpanded = false;
 
   collapse() {
@@ -14,5 +18,9 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  setLang(lang: string) {
+    this.translate.use(lang);
   }
 }
